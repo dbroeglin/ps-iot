@@ -43,7 +43,7 @@ function normalize(val) {
 function doPoll(){
     $.get(functionUrl, function(data) {
         console.log("Data: " + JSON.stringify(data));
-        setTimeout(doPoll,1500);
+        setTimeout(doPoll, 250);
         dataRollx = normalize(data.x);
         dataRolly = normalize(data.y);
         dataRollz = normalize(data.z); 
