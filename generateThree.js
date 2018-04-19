@@ -148,7 +148,7 @@ function animate() {
 
 function render() {
     cube.rotation.x = -dataRollx;
-    cube.rotation.y = -dataRollz;
+    cube.rotation.y = 0;
     cube.rotation.z = -dataRolly;
     renderer.render( scene, camera );
 }
