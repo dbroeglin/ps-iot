@@ -78,7 +78,7 @@ function init() {
     scene = new THREE.Scene();
 
     // Create cube
-    var geometry = new THREE.BoxGeometry( 300, 300, 300 );
+    var geometry = new THREE.BoxGeometry( 400, 400, 400 );
 
     for ( var i = 0; i < geometry.faces.length; i += 2 ) {
 
