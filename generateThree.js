@@ -84,7 +84,7 @@ function init() {
     info.style.top = '10px';
     info.style.width = '100%';
     info.style.textAlign = 'center';
-    info.innerHTML = 'Visualize IMU';
+    info.innerHTML = 'PowerShell IOT - Demo';
     info.setAttribute('id', 'pourHeading');
     container.appendChild( info );
 
