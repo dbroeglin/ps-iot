@@ -8,7 +8,7 @@ Generate 3D render using serial data from IMU
 
 // Declare required variables
 
-var functionUrl = 'https://powershell-iot.azurewebsites.net/api/RpiData?code=RDPgc80BJ67uOUxhe/5348iOe01HhiTQBCsVoClyQFyuFoMD8dZaQw=='
+var functionUrl = 'https://powershell-iot.azurewebsites.net/api/RpiData'
 
 var dataRollx = 0;
 var dataRolly = 0;
@@ -44,7 +44,7 @@ function normalize(val) {
 function doPoll(){
     $.get(functionUrl, function(data) {
         console.log("Data: " + JSON.stringify(data));
-        setTimeout(doPoll,250);
+        setTimeout(doPoll,1500);
         dataRollx = normalize(data.x);
         dataRolly = normalize(data.y);
         dataRollz = normalize(data.z); 
@@ -148,7 +148,7 @@ function animate() {
 
 function render() {
     cube.rotation.x = -dataRollx;
-    cube.rotation.y = -dataRolly;
-    cube.rotation.z = 1.57 - dataRollz;
+    cube.rotation.y = -dataRollz;
+    cube.rotation.z = -dataRolly;
     renderer.render( scene, camera );
 }
