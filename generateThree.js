@@ -32,7 +32,6 @@ var serverIP = "localhost";
 console.log('socket connected to: ' + serverIP);
 
 // Start reading IMU data
-//runSocket();
 init();
 animate();
 
@@ -53,25 +52,6 @@ function doPoll(){
 doPoll();
 
 
-function runSocket() {
-        socket.on('serial_update', function(data) {
-            if (data.charAt(0) === 'O') {
-                console.log(data);
-                var dataArray = data.split(/ /);
-
-                // set x
-                dataRollx = (dataArray[1] *= orderOfMag).toFixed(accuracy);
-                
-                // set y
-                dataRolly = (dataArray[2] *= orderOfMag).toFixed(accuracy);
-
-                // set z
-                dataRollz = (dataArray[3] *= orderOfMag).toFixed(accuracy);
-
-                console.log(dataRollx + "," + dataRolly + "," + dataRollz);
-            }
-        });
-}
 
 
 function init() {
@@ -91,14 +71,14 @@ function init() {
     $("#pourHeading").append("<div id='subHeading'></div>");
 
     // Set up camera
-    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.y = 150;
+    camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 1000 );
+    camera.position.y = 250;
     camera.position.z = 700;
 
     scene = new THREE.Scene();
 
     // Create cube
-    var geometry = new THREE.BoxGeometry( 100, 200, 100 );
+    var geometry = new THREE.BoxGeometry( 300, 300, 300 );
 
     for ( var i = 0; i < geometry.faces.length; i += 2 ) {
 
@@ -109,19 +89,22 @@ function init() {
     }
 
     var material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors, overdraw: 0.5 } );
+    var img = new THREE.MeshLambertMaterial({
+        map:THREE.ImageUtils.loadTexture('/psconf.jpg'),
+        color: new THREE.Color( 0xff0000 )
+    });
 
-    cube = new THREE.Mesh( geometry, material );
+    cube = new THREE.Mesh( geometry, img );
     cube.position.y = 150;
     scene.add( cube );
 
     // Create background plane
-    var geometry = new THREE.PlaneBufferGeometry( 400, 200 );
+    var geometry = new THREE.PlaneBufferGeometry( 600, 200 );
     geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 
     var material = new THREE.MeshBasicMaterial( { color: 0xe0e0e0, overdraw: 0.5 } );
-
-    plane = new THREE.Mesh( geometry, material );
-    scene.add( plane );
+    plane = new THREE.Mesh( geometry, material);
+    //scene.add( plane );
 
     renderer = new THREE.CanvasRenderer();
     renderer.setClearColor( 0xf0f0f0 );
